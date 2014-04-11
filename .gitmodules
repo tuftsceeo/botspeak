@@ -1,3 +1,24 @@
 [submodule "Devices/Arduino"]
 	path = Devices/Arduino
 	url = git@github.com:jedpalmer/bs_arduino.git
+[submodule "RaspberryPi"]
+	path = RaspberryPi
+	url = git@github.com:jedpalmer/bs_raspberrypi.git
+[submodule "Thymio"]
+	path = Thymio
+	url = git@github.com:jedpalmer/bs_thymio
+[submodule "PICAXE"]
+	path = PICAXE
+	url = git@github.com:jedpalmer/bs_picaxe
+[submodule "Launchpad"]
+	path = Launchpad
+	url = git@github.com:jedpalmer/bs_launchpad.git
+[submodule "Galileo"]
+	path = Galileo
+	url = git@github.com:jedpalmer/bs_galileo.git
+[submodule "EvalRIO"]
+	path = EvalRIO
+	url = git@github.com:jedpalmer/bs_evalrio.git
+[submodule "BeagleBone"]
+	path = BeagleBone
+	url = git@github.com:jedpalmer/bs_beaglebone.git
