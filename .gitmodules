@@ -1,0 +1,3 @@
+[submodule "Devices/Arduino"]
+	path = Devices/Arduino
+	url = git@github.com:jedpalmer/bs_arduino.git
