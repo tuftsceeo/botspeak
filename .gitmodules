@@ -19,3 +19,6 @@
 [submodule "Devices/Thymio"]
 	path = Devices/Thymio
 	url = git@github.com:jedpalmer/bs_Thymio
+[submodule "Devices/EvalRIO"]
+	path = Devices/EvalRIO
+	url = git@github.com:jedpalmer/bs_evalrio.git
