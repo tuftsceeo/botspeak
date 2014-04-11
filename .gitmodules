@@ -16,9 +16,6 @@
 [submodule "Galileo"]
 	path = Galileo
 	url = git@github.com:jedpalmer/bs_galileo.git
-[submodule "EvalRIO"]
-	path = EvalRIO
-	url = git@github.com:jedpalmer/bs_evalrio.git
 [submodule "BeagleBone"]
 	path = BeagleBone
 	url = git@github.com:jedpalmer/bs_beaglebone.git
