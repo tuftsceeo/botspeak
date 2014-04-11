@@ -1,0 +1,22 @@
+BotSpeak Spec File
+
+Hardware = Console Only
+HardwareWebAddress = http://sites.google.com/site/botspeak  
+HelpText = This is just to test code - you can see what gets sent out in both BotSpeak and TinySpeak   //Help menu section
+
+Translation = Tiny       //reduces code down to Byte Code for very small processors
+ComType = Console         // Serial or TCPIP or ROSBridge
+SerialCom = NA   // 9600 baud, 8 data bits, 1 stop bit, no parity (0=none, 1 = odd, 2=even)
+Port = 0              // not used in serial
+DefaultAddress = Auto    // default IP address or search for connected devices 
+
+StartupWait = 1       // wait in msec after initialization and before writing    
+Patience = 1         // wait in msec before giving up on a read
+StartupPatience = 1    // wait in msec before giving up on a read - ONLY on startup
+Retries = 1              // number of retries before giving up
+
+VariableDataType = FLOAT   //variable format - INT, FLOAT, FIXED
+
+MaxScriptSize = 1000     // Max Script Size
+MaxVarNumber = 100       // Maximum number of variables
+

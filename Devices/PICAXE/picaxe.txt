@@ -1,0 +1,21 @@
+BotSpeak Spec File
+
+Hardware = PICAXE 80M
+HardwareWebAddress = http://www.picaxe.com  
+HelpText = good luck   //Help menu section
+
+Translation = Tiny       //reduces code down to Byte Code for very small processors
+ComType = Serial         // Serial or TCPIP or ROSBridge
+SerialCom = 4800,8,1,0   // 9600 baud, 8 data bits, 1 stop bit, no parity (0=none, 1 = odd, 2=even)
+Port = 0              // not used in serial
+DefaultAddress = Auto    // default IP address or search for connected devices 
+
+StartupWait = 1000       // wait in msec after initialization and before writing    
+Patience = 1000         // wait in msec before giving up on a read
+StartupPatience = 100    // wait in msec before giving up on a read - ONLY on startup
+Retries = 3              // number of retries before giving up
+
+VariableDataType = INT   //variable format - INT, FLOAT, FIXED
+
+MaxScriptSize = 1000     // Max Script Size
+MaxVarNumber = 100       // Maximum number of variables
