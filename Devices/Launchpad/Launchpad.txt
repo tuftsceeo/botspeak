@@ -1,0 +1,22 @@
+BotSpeak Spec File
+
+Hardware = Launchpad
+HardwareWebAddress = http://www.energia.nu  
+HelpText = You should already have the VM running on your Launchpad.  You can test with the TEST button.  To load it, open the Energia IDE and download the URAPI program in the BotSpeak:Devices:Launchpad:VM folder.   
+
+Translation = Tiny       //reduces code down to Byte Code for very small processors
+ComType = Serial         // Serial or TCPIP or ROSBridge
+SerialCom = 9600,8,1,0   // 9600 baud, 8 data bits, 1 stop bit, no parity (0=none, 1 = odd, 2=even)
+Port = 0                 // not used in serial
+DefaultAddress = Auto    // default IP address or search for connected devices 
+
+StartupWait = 1000       // wait in msec after initialization and before writing    
+Patience = 10000         // wait in msec before giving up on a read
+StartupPatience = 100    // wait in msec before giving up on a read - ONLY on startup
+Retries = 3              // number of retries before giving up
+
+VariableDataType = INT   //variable format - INT, FLOAT, FIXED
+
+MaxScriptSize = 100      // Max Script Size
+MaxVarNumber = 30        // Maximum number of variables
+
