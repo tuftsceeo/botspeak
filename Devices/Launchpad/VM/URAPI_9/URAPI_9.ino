@@ -56,6 +56,8 @@ void loop () {
     }*/
    Serial.println(ExecuteCommand(0,0));
  
+ //scripting is commented out, not sure why - probably because there is not eneough memory on the chip
+ 
  /*   Reply = " ";
     Reply = " [" + length ;  
 
