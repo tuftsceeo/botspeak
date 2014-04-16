@@ -1,0 +1,21 @@
+BotSpeak Spec File
+
+Hardware = Raspberry Pi
+HardwareWebAddress = http://www.raspberrypi.org  
+HelpText = You should already have the Pi VM running on your Pi.  You can test with the TEST button.  To load it, ask Rafi   //Help menu section
+
+Translation = None       //reduces code down to Byte Code for very small processors
+ComType = TCPIP         // Serial or TCPIP or ROSBridge
+SerialCom = NA   // 9600 baud, 8 data bits, 1 stop bit, no parity (0=none, 1 = odd, 2=even)
+Port = 9999              // not used in serial
+DefaultAddress = 130.64.97.177    // default IP address or search for connected devices 
+
+StartupWait = 10       // wait in msec after initialization and before writing    
+Patience = 5000         // wait in msec before giving up on a read
+StartupPatience = 100    // wait in msec before giving up on a read - ONLY on startup
+Retries = 3              // number of retries before giving up
+
+VariableDataType = FLOAT   //variable format - INT, FLOAT, FIXED
+
+MaxScriptSize = 5000     // Max Script Size
+MaxVarNumber = 1000       // Maximum number of variables
