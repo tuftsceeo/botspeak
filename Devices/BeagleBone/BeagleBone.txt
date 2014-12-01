@@ -4,11 +4,13 @@ Hardware = BeagleBone
 HardwareWebAddress = http://www.ti.com  
 HelpText = You should already have the Bone VM running on your BeagleBone.  You can test with the TEST button.  To load it, open the Cloud 9 IDE and download the URAPI program in the BotSpeak:Devices:BeagleBone:VM folder.   
 
-Translation = None                      //reduces code down to Byte Code for very small processors
+Tiny = False                       //reduces code down to Byte Code for very small processors
 ComType = TCPIP                    // Serial or TCPIP or ROSBridge
 SerialCom = NA                    // 9600 baud, 8 data bits,0 start bits, 1 stop bit, no parity
 Port = 2012                         // not used in serial
-DefaultAddress = beaglebone.local   //192.168.7.2   // default IP address or search for connected devices - 192.168.7.2 
+DefaultAddress = 192.168.7.2   //192.168.7.2   // default IP address or search for connected devices - 192.168.7.2 
+Username = root
+Password = 
 
 StartupWait = 1       // wait in msec after initialization and before writing    
 Patience = 5000         // wait in msec before giving up on a read
@@ -20,4 +22,30 @@ VariableDataType = FLOAT   //variable format - INT, FLOAT, FIXED
 MaxScriptSize = 5000     // Max Script Size
 MaxVarNumber = 1000       // Maximum number of variables
 
-DIO 1 = "bone.P9_36"
+// security for downloading firmware
+user = root
+pass =
+
+DIO[] = [ 
+	0:”USR0", 
+	1:”USR1", 
+	2:”USR2", 
+	3:”USR3", 
+	4:”P9_11”, 
+	5:”P9_12”, 
+	6:”P9_13”, 
+	7:”P9_15”, 
+	8:”P9_17”, 
+	9:”P9_23”, 
+	10:”P9_27”, 
+	11:”P9_30”,
+	12:”P9_41”, 
+	13:”P8_11”, 
+	14:”P8_12”, 
+	15:”P8_14”, 
+	16:”P8_15”
+	]   // defines all the elements and pins for the DIO array
+
+AI[] = ["P9_33”,”P9_35”,”P9_36”,”P9_37”,”P9_38”,”P9_39”,”P9_40”]
+PWM[] = ["P9_14","P9_16","P9_21”,”P9_22”, "P9_42”, "P8_13”, "P8_19”]; //PWM capable pins
+AO[] = [];

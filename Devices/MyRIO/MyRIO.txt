@@ -1,0 +1,25 @@
+BotSpeak Spec File
+
+Hardware = MyRIO
+HardwareWebAddress = http://www.ni.com  
+HelpText = You should already have the VM running on your RIO.  You can test with the TEST button.     
+
+Translation = None                  //reduces code down to Byte Code for very small processors
+ComType = TCPIP                    // Serial or TCPIP or ROSBridge
+SerialCom = NA
+Port = 2012                         // not used in serial
+DefaultAddress = 172.22.11.2 //192.168.1.60 //169.254.66.100    // default IP address or search for connected devices 
+
+StartupWait = 1       // wait in msec after initialization and before writing    
+Patience = 5000         // wait in msec before giving up on a read
+StartupPatience = 100    // wait in msec before giving up on a read - ONLY on startup
+Retries = 3              // number of retries before giving up
+
+VariableDataType = FLOAT   //variable format - INT, FLOAT, FIXED
+
+MaxScriptSize = 5000     // Max Script Size
+MaxVarNumber = 1000       // Maximum number of variables
+
+DIOLines = 0..13 
+PWMLines = 3,5,9..11
+AILines = 0..4

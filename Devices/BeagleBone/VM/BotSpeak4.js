@@ -1,5 +1,7 @@
 var net = require('net');
 var b = require('bonescript');
+var socketio = require('bonescript/node_modules/socket.io');
+var fs = require('fs');
 
 //I think the BeagleBone Black supports much more than this, but maybe the original BeagleBone doesn't?
 var DIO_SIZE = 12;
@@ -15,7 +17,7 @@ var PWMPins = ["P9_14","P9_16","P8_19","P8_13", "P8_34", "P8_36", "P8_45", "P8_4
 
 var SCRIPT = []; //initialize script space; javascript autosizes arrays
 var TIMER = []; //initialize timer space
-var VARS = {VER:'0.9', HI:'1', LO:'0', END: '0'}; //initialize variable space, first 4 are reserved for system info
+var VARS = {VER:'4', HI:'1', LO:'0', END: '0'}; //initialize variable space, first 4 are reserved for system info
 
 var server = net.createServer(socketOpen); //start the server
 
@@ -37,9 +39,29 @@ function socketOpen(socket) {
     }
 }
 
+function socketioOpen(socket) {
+    socket.write = function () {
+        var args = Array.prototype.slice.call(arguments);
+        args.unshift('message');
+        socket.emit.apply(this, args);
+    }
+    socket.on('end', socketClose);
+    function socketClose() {
+    }
+    socket.on('data', socketData);
+    function socketData(data) {
+        var reply = RunBotSpeak(data,socket);
+        if (reply !== '') socket.emit('message', reply);
+        if ((reply !== "close") && (data !== '')) console.log("Got: " + data.replace(/\n/g,",") + " Replied: " + reply.replace(/\n/g,","));
+    }
+}
+
 console.log("starting");
-server.listen(2012); //listen at this port
-Startlights(); //flash the built in LEDs on the BeagleBone to indicate that we are running
+server.listen(2012);
+var io = socketio.listen(2013);
+io.set('log level', 0);
+io.sockets.on('connection', socketioOpen);
+Startlights();
 
 function RunBotSpeak (command,socket) {
     var BotCode = command.split('\n');
@@ -48,20 +70,20 @@ function RunBotSpeak (command,socket) {
     var reply = "";
     var scripting = -1, ptr = 0,i,j;
     
-	function RunScript (debug){
+    function RunScript (debug){
 		j = Retrieve(BotCode[i].slice(BotCode[i].indexOf(' ')));
 		VARS["END"] = SCRIPT.length - 1;
 		while (j < VARS["END"]) {
 			var reply1 = ExecuteCommand(SCRIPT[j]);
 			//                    console.log('executed '+SCRIPT[j]+' -> ' + reply1);
-			if (debug && (command !== 'RUN')) socket.write(SCRIPT[j] + ' -> '+ reply1 + '\n');}
+			if (debug && (command !== 'RUN')) socket.write(SCRIPT[j] + ' -> '+ reply1 + '\n');
 			var goto = String(reply1).split(' ');
 			j = (goto[0] == "GOTO") ? Number(goto[1]): j + 1;
 		}
 		if (debug) reply += "ran " +VARS["END"] + " lines of script\nDone";
 		if (debug) { if (command == 'RUN') reply = '';}
 	}
-	
+
     for (i = 0;i < TotalSize; i++) {
         //        console.log(GetCommand(BotCode[i]));
         switch (GetCommand(BotCode[i])) {
@@ -83,7 +105,7 @@ function RunBotSpeak (command,socket) {
             case "RUN":			//RUN is supposed to start the script, but I don't see how this would do that
                 RunScript(false);
 				break;
-				
+
             case "RUN&WAIT":
             case "DEBUG":		//Run script in debug mode: echo each command as it executes and also print the value returned by the command
                 RunScript(true);
@@ -280,3 +302,12 @@ function SystemCall(args) { //this is just an example of something a user might 
     
     return freq;
 }
+
+process.on('uncaughtException', function(err) {
+	console.log('Exception: ' + err);
+
+	// Trigger autorun to restart us
+	var stat = fs.statSync(__filename);
+	fs.utimesSync(__filename, stat.atime, new Date());
+	process.exit(1);
+});
