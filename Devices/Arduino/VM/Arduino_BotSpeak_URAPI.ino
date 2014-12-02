@@ -333,7 +333,6 @@ int PWMPort(int port,int value) {
   
 int ServoPort(int port,int value) {
    SERVOS[port].attach(ServoPins[port]);
-   Serial.println("value: "); Serial.println(value);
    SERVOS[port].write(map(value, 50, 100, 0, 180));
    return (map(value, 50, 100, 0, 180));
   }
