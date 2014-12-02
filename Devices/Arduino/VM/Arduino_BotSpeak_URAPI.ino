@@ -53,7 +53,7 @@
 
 #include <Servo.h> // servo library
 
-#define VERSION 1.0
+#define VERSION 1
 #define DirectSize 30 //BotCode buffer size
 #define ScriptSize 1000 //Script storage size
 #define VarSize 30 //allocated size for BotSpeak variables
