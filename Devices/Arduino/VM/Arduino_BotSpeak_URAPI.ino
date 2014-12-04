@@ -221,6 +221,7 @@ int ExecuteCommand(int ptr,int s) { //ptr is the code index, s indicates script 
         }
       Jump = (Compare) ? Retrieve(ptr+6,s) : ptr + 8;
       Reply.concat('('); Reply.concat(A); Reply.concat(' '); Reply.concat(comparison); Reply.concat(' '); Reply.concat(B); Reply.concat(')'); Reply.concat("->"); Reply.concat(Jump);
+      return Jump;
     case 'i': // ~if statement  
        A = Retrieve(ptr+2,s);  
        B = Retrieve(ptr+4,s);
