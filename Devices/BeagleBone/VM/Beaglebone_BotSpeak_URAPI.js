@@ -60,7 +60,7 @@ function RunBotSpeak (command,socket) {
 			j = (goto[0] == "GOTO") ? Number(goto[1]): j + 1;
 		}
 		if (debug) reply += "ran " +VARS["END"] + " lines of script\nDone";
-		if (!debug) reply += "ran script";
+	//	if (!debug) reply += "ran script";
 	}
 
     for (i = 0;i < TotalSize; i++) {
