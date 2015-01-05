@@ -48,6 +48,7 @@ function RunBotSpeak (command,socket) {
     var TotalSize = BotCode.length;
     var reply = "";
     var scripting = -1, ptr = 0,i,j;
+    SCRIPT = [];
     
     function RunScript (debug){
 		j = Retrieve(BotCode[i].slice(BotCode[i].indexOf(' ')));
