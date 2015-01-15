@@ -48,20 +48,28 @@ function RunBotSpeak (command,socket) {
     var TotalSize = BotCode.length;
     var reply = "";
     var scripting = -1, ptr = 0,i,j;
-    SCRIPT = [];
     
     function RunScript (debug){
-		j = Retrieve(BotCode[i].slice(BotCode[i].indexOf(' ')));
-		VARS["END"] = SCRIPT.length - 1;
-		while (j < VARS["END"]) {
+	j = Number(Retrieve(BotCode[i].slice(BotCode[i].indexOf(' '))));
+	VARS["END"] = SCRIPT.length - 1;
+    	if(j <= VARS["END"]) setTimeout(runExecuteCommand, 0);
+		function runExecuteCommand() {
 			var reply1 = ExecuteCommand(SCRIPT[j]);
-			console.log('executed '+SCRIPT[j]+' -> ' + reply1);
-			if (debug) socket.write(SCRIPT[j] + ' -> '+ reply1 + '\n');
+			if (debug && (command !== 'RUN')) {
+			    socket.emit('message',(SCRIPT[j] + ' -> '+ reply1 + '\n'));
+			    console.log(SCRIPT[j] + ' -> '+ reply1 + '\n');
+			}
 			var goto = String(reply1).split(' ');
 			j = (goto[0] == "GOTO") ? Number(goto[1]): j + 1;
+			
+    			if(j <= VARS["END"]) {
+    				setTimeout(runExecuteCommand, 0);
+    			} else {
+        			if (debug) reply += "ran " + (Number(VARS["END"]) + 1) + " lines of script\nDone";
+        			if (debug) { if (command == 'RUN') reply = '';}
+        	    		socket.emit('message',reply);
+    			}
 		}
-		if (debug) reply += "ran " +VARS["END"] + " lines of script\nDone";
-	//	if (!debug) reply += "ran script";
 	}
 
     for (i = 0;i < TotalSize; i++) {
