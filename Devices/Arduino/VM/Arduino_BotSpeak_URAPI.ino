@@ -250,14 +250,14 @@ int Assign(int destIndex,int value, int s) {
         case 255: LoByte = (LoByte < VarSize) ? LoByte:VarSize;     VARS[LoByte] = value;                     break; //LoByte is a pointer to a variable
 
         case 224: LoByte = (LoByte < DIO_SIZE) ? LoByte:DIO_SIZE;   value = ServoPort(VARS[LoByte],value);            break; //Toggles port indicated by LoByte variable using the delay in "value"
-        case 223: LoByte = (LoByte < PWM_SIZE) ? LoByte:PWM_SIZE;   PWMPort(PWMPins[VARS[LoByte]],value);     break;  //sets PWM port indicated by LoByte variable to "value"
-        case 222: LoByte = (LoByte < DIO_SIZE) ? LoByte:DIO_SIZE;   SetPort(DIOPins[VARS[LoByte]],value);     break;  //Sets DIO port indicated by LoByte variable to "value"
+        case 223: LoByte = (LoByte < PWM_SIZE) ? LoByte:PWM_SIZE;   value = PWMPort(PWMPins[VARS[LoByte]],value);     break;  //sets PWM port indicated by LoByte variable to "value"
+        case 222: LoByte = (LoByte < DIO_SIZE) ? LoByte:DIO_SIZE;   value = SetPort(DIOPins[VARS[LoByte]],value);     break;  //Sets DIO port indicated by LoByte variable to "value"
         case 221:                                                                                             break;  // Analog in indirect
         case 220: LoByte = (LoByte < TMR_SIZE) ? LoByte:TMR_SIZE; TIMER[VARS[LoByte]] = millis() + value;     break; //assigns value of a timer based on current clock reading
 
         case 204: LoByte = (LoByte < DIO_SIZE) ? LoByte:DIO_SIZE;   value = ServoPort(LoByte,value);        break;  
-        case 203: LoByte = (LoByte < PWM_SIZE) ? LoByte:PWM_SIZE;   PWMPort(PWMPins[LoByte],value);           break;  
-        case 202: LoByte = (LoByte < DIO_SIZE) ? LoByte:DIO_SIZE;   SetPort(DIOPins[LoByte],value);           break;
+        case 203: LoByte = (LoByte < PWM_SIZE) ? LoByte:PWM_SIZE;   value = PWMPort(PWMPins[LoByte],value);           break;  
+        case 202: LoByte = (LoByte < DIO_SIZE) ? LoByte:DIO_SIZE;   value = SetPort(DIOPins[LoByte],value);           break;
         case 201:                                                                                             break;  // Analog in
         case 200: LoByte = (LoByte < TMR_SIZE) ? LoByte:TMR_SIZE; TIMER[LoByte] = millis() + value;           break;
         default:  
@@ -328,7 +328,8 @@ int PWMPort(int port,int value) {
      PINS[port]=1;
    }
     // rescale to 1024 because of the resolution of the analog output
-   analogWrite(port,map(value, 0, 100, 0, 255));
+   value = map(value, 0, 100, 0, 255);
+   analogWrite(port,value);
    return (value);
   }
   
@@ -378,4 +379,3 @@ int SystemCall(int ptr,int s)  { //this is a hook for implementing custom functi
   Reply.concat(" "); Reply.concat(Jump);         // what gets returned in debug mode
   return ampl*freq;                           // what gets returned in direct mode
 }
-
