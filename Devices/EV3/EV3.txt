@@ -5,18 +5,20 @@ HardwareWebAddress = http://lego.com
 HelpText = This lets you talk to the EV3 over BotSpeak   //Help menu section
 
 Translation = None       //reduces code down to Byte Code for very small processors
-ComType = EV3         // Serial or TCPIP or ROSBridge
+ComType = HTTP         // Serial or TCPIP or ROSBridge
 SerialCom = NA   // 9600 baud, 8 data bits, 1 stop bit, no parity (0=none, 1 = odd, 2=even)
-Port = 0              // not used in serial
-DefaultAddress = Auto    // default IP address or search for connected devices 
+Port = 2012              // not used in serial
+DefaultAddress = 192.168.2.3    // default IP address or search for connected devices 
+Username = root
+Password = r00tme 
 
 StartupWait = 1       // wait in msec after initialization and before writing    
-Patience = 1         // wait in msec before giving up on a read
-StartupPatience = 1    // wait in msec before giving up on a read - ONLY on startup
-Retries = 1              // number of retries before giving up
+Patience = 5000         // wait in msec before giving up on a read
+StartupPatience = 100    // wait in msec before giving up on a read - ONLY on startup
+Retries = 3              // number of retries before giving up
 
 VariableDataType = FLOAT   //variable format - INT, FLOAT, FIXED
 
-MaxScriptSize = 1000     // Max Script Size
-MaxVarNumber = 100       // Maximum number of variables
+MaxScriptSize = 5000     // Max Script Size
+MaxVarNumber = 1000       // Maximum number of variables
 
